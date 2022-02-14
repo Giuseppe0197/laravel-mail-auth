@@ -13,10 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home'); */
+
+Route::get('/', 'GuestController@home') -> name('home');
+
+Route::post('/register', 'Auth\RegisterController@register') -> name('register');
+
+Route::post('/login', 'Auth\LoginController@login') -> name('login');
+
+Route::get('/logout', 'Auth\LoginController@logout') -> name('logout');
+
+Route::get('/api/videogames/list', 'ApiController@getVideogames') -> name('api.videogames.list');
+
+Route::get('/api/videogames/delete/{id}', 'ApiController@deleteVideogames') -> name('api.videogames.delete');
+
+Route::get('/mail/validate/{id}', 'HomeController@mailValidate') -> name('validation');
